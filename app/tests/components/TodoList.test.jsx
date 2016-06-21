@@ -30,4 +30,14 @@ describe('TodoList', () => {
   expect(todosComponents.length).toBe(todos.length);
 
   })
+
+  it('should render empty message if no todos', () => {
+    var todos = [];
+
+  var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}></TodoList>)
+  var $el =$(ReactDom.findDOMNode(todoList));
+  expect($el.find('.container__message').length).toBe(1);
+
+  })
+
 });
