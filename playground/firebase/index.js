@@ -8,6 +8,8 @@ var config = {
 };
 firebase.initializeApp(config);
 
+// BASIC CRUD operations, .set -> create , .update -> update , .remove -> remove
+
 var firebaseRef = firebase.database().ref();
 firebaseRef.set({
   app: {
@@ -45,15 +47,23 @@ firebaseRef.set({
 // });
 
 //challange solution 2, using child
-firebaseRef.child('app').update({
-  name: 'Todo Application',
-}).then(() => {
-  console.log('updated app name');
-}, (e) => {
-  console.log('failed to update app name');
-});
+// firebaseRef.child('app').update({
+//   name: 'Todo Application',
+// }).then(() => {
+//   console.log('updated app name');
+// }, (e) => {
+//   console.log('failed to update app name');
+// });
+//
+//
+// firebaseRef.child('user').update({
+//   name: 'Pluto',
+// });
 
-
-firebaseRef.child('user').update({
-  name: 'Pluto',
-});
+// remove challange solution 1 , using null and update
+//
+// firebaseRef.update({
+//   isRunning: null
+// });
+//
+// firebaseRef.child('user/age').remove();
