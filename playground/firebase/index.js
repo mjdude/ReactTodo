@@ -113,11 +113,42 @@ firebaseRef.set({
 
 
 // Challange , create listener for user and NOT for app
+//
+// var  logData = (snapshot) => {
+//   console.log('Updated ', snapshot.val());
+// };
+// firebaseRef.child('user').on('value', logData );
+//
+// firebaseRef.child('user').update({ name: 'MJ'});
+// firebaseRef.child('app').update({ name: 'New App Name'});
 
-var  logData = (snapshot) => {
-  console.log('Updated ', snapshot.val());
-};
-firebaseRef.child('user').on('value', logData );
+// ARRAYS !!
 
-firebaseRef.child('user').update({ name: 'MJ'});
-firebaseRef.child('app').update({ name: 'New App Name'});
+// challange
+
+var todosRef = firebaseRef.child('todos');
+
+todosRef.on('child_added', (snapshot) => {
+  console.log('New todo added ', snapshot.key, snapshot.val());
+});
+
+todosRef.on('child_changed', (snapshot) => {
+  console.log('todo changed', snapshot.key , snapshot.val());
+});
+
+todosRef.on('child_removed', (snapshot) => {
+  console.log('todo removed', snapshot.key , snapshot.val());
+});
+
+var todo1 = todosRef.push({
+  text: 'walk the dog',
+});
+todosRef.push({
+  text: 'go to sleep',
+});
+
+// example update to todo
+todo1.update({text: 'talk to dog'});
+
+//example remove todo
+todo1.remove();
