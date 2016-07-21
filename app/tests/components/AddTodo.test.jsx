@@ -3,8 +3,7 @@ var ReactDom = require('react-dom');
 var expect = require('expect');
 var $ = require('jquery');
 var TestUtils = require('react-addons-test-utils');
-
-  var {AddTodo} = require('AddTodo');
+var {AddTodo} = require('AddTodo');
 
 describe('Todo', () => {
 
