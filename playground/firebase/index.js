@@ -100,13 +100,24 @@ firebaseRef.set({
 
 // put callback into a variable , to use multiple listensers
 
-var logData = (snapshot) => {
- console.log('got value ', snapshot.val());
+// var logData = (snapshot) => {
+//  console.log('got value ', snapshot.val());
+// };
+//
+// firebaseRef.on('value', logData );
+//
+// // this turns off all listensers,
+// firebaseRef.off('value', logData);
+//
+// firebaseRef.update({ isRunning: false});
+
+
+// Challange , create listener for user and NOT for app
+
+var  logData = (snapshot) => {
+  console.log('Updated ', snapshot.val());
 };
+firebaseRef.child('user').on('value', logData );
 
-firebaseRef.on('value', logData );
-
-// this turns off all listensers,
-firebaseRef.off('value', logData);
-
-firebaseRef.update({ isRunning: false});
+firebaseRef.child('user').update({ name: 'MJ'});
+firebaseRef.child('app').update({ name: 'New App Name'});
