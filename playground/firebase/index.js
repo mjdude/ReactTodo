@@ -8,7 +8,7 @@ var config = {
 };
 firebase.initializeApp(config);
 
-// BASIC CRUD operations, .set -> create , .update -> update , .remove -> remove
+// BASIC CRUD operations, .set -> create , .update -> update , .remove -> delete
 
 var firebaseRef = firebase.database().ref();
 firebaseRef.set({
@@ -67,3 +67,46 @@ firebaseRef.set({
 // });
 //
 // firebaseRef.child('user/age').remove();
+
+
+// Read ( from CRUD), once and on are listensers , they isten for changes.
+// once can only be called once. 'on' continues to listen for changes, and can be durned off
+// with the 'off' command
+
+// all data (using once method)
+// firebaseRef.once('value').then((snapshot) => {
+//   console.log('got entire database', snapshot.val());
+// },(e) => {
+//   console.log('unable to get dat from database');
+// });
+
+// child, when getting child you canalso get the key
+// firebaseRef.child('app').once('value').then((snapshot) => {
+//   console.log('got entire ', snapshot.key,snapshot.val());
+// },(e) => {
+//   console.log('unable to get dat from database');
+// });
+
+// ------------- Listners
+// listening to changes in database (method is called on), off() switches off the listener
+// firebaseRef.on('value', (snapshot) => {
+//  console.log('got value ', snapshot.val());
+// });
+//
+// // this turns off all listensers,
+// firebaseRef.off();
+//
+// firebaseRef.update({ isRunning: false});
+
+// put callback into a variable , to use multiple listensers
+
+var logData = (snapshot) => {
+ console.log('got value ', snapshot.val());
+};
+
+firebaseRef.on('value', logData );
+
+// this turns off all listensers,
+firebaseRef.off('value', logData);
+
+firebaseRef.update({ isRunning: false});
