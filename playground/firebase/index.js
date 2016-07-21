@@ -34,11 +34,26 @@ firebaseRef.set({
 //   console.log('update failed');
 // });
 
-firebaseRef.update({
-  'app/name': 'Todo Application',
-  'user/name': 'JoStar',
-}).then(() =>{
-  console.log('sucessfully updated names');
-}, () => {
-  console.log('update failed');
+//challange solution 1, multipath update
+// firebaseRef.update({
+//   'app/name': 'Todo Application',
+//   'user/name': 'JoStar',
+// }).then(() =>{
+//   console.log('sucessfully updated names');
+// }, () => {
+//   console.log('update failed');
+// });
+
+//challange solution 2, using child
+firebaseRef.child('app').update({
+  name: 'Todo Application',
+}).then(() => {
+  console.log('updated app name');
+}, (e) => {
+  console.log('failed to update app name');
+});
+
+
+firebaseRef.child('user').update({
+  name: 'Pluto',
 });
