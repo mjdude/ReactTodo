@@ -17,10 +17,15 @@ describe('Actions', () => {
     it('should generate addtodo function', () => {
       var action = {
         type: 'ADD_TODO',
-        text: 'go running',
+        todo: {
+          id: '123',
+          text: 'go running',
+          completed: false,
+          createdAt: 1231231,
+        },
       };
 
-      var res = actions.addTodo(action.text);
+      var res = actions.addTodo(action.todo);
 
       expect(res).toEqual(action);
     });
