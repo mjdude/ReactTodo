@@ -1,5 +1,10 @@
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 var expect = require('expect');
+
 var actions = require('actions');
+
+var createMockStore = configureMockStore([thunk]);
 
 describe('Actions', () => {
     it('should generate search text action', () => {
@@ -28,6 +33,26 @@ describe('Actions', () => {
       var res = actions.addTodo(action.todo);
 
       expect(res).toEqual(action);
+    });
+
+    // done lets us test for asynchon calls, continue to listen until done
+    it('should create and dispatch ADD_TODO', (done) => {
+      const store = createMockStore();
+      const todoText = 'My todo item';
+
+      store.dispatch(actions.startAddTodo(todoText)).then(() => {
+        const actions = store.getActions();
+        expect(actions[0]).toInclude({
+          type: 'ADD_TODO',
+        });
+
+        expect(actions[0]).toInclude({
+          text: todoText,
+        });
+        //only way our test can run sucessfully, you need to call done, so karma knows is done
+        done();
+      }).catch(done);
+
     });
 
     it('shoud generate ADD_TODOS actions object', () => {
