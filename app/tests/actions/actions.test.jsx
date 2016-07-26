@@ -36,23 +36,22 @@ describe('Actions', () => {
     });
 
     // done lets us test for asynchon calls, continue to listen until done
-    it('should create and dispatch ADD_TODO', (done) => {
-      const store = createMockStore();
+    // done needs to be called after the assertions otherwise test will fail
+    // done tells karma to stop listening
+    it('should create todo and dispatch ADD_TODO', (done) => {
+      const store = createMockStore({});
       const todoText = 'My todo item';
 
       store.dispatch(actions.startAddTodo(todoText)).then(() => {
         const actions = store.getActions();
         expect(actions[0]).toInclude({
-          type: 'ADD_TODO',
+          type: 'ADD_TODO'
         });
-
-        expect(actions[0]).toInclude({
-          text: todoText,
+        expect(actions[0].todo).toInclude({
+          text: todoText
         });
-        //only way our test can run sucessfully, you need to call done, so karma knows is done
         done();
       }).catch(done);
-
     });
 
     it('shoud generate ADD_TODOS actions object', () => {
