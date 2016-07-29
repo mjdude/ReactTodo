@@ -1,5 +1,6 @@
 import moment from 'moment';
 import firebase , {firebaseRef} from 'app/firebase/';
+var _ = require('underscore');
 
 export var setSearchText = (searchText) => {
   return {
@@ -25,6 +26,31 @@ export var addTodos = (todos) => {
   return {
     type: 'ADD_TODOS',
     todos
+  };
+};
+
+export var startAddTodos = () => {
+  return (dispatch, getState) => {
+    var todosRef = firebaseRef.child('todos');
+    var todos =[];
+    var data = todosRef.once("value", (snap) => {
+      debugger;
+
+      // var original = {a:1, b:2, c:3};
+      // var squaredValues = _.object(_.map(original, function (value, key) {
+      //   return [key, value * value];
+      // }));
+
+      var res = _.object(_.map(snap.val(), (value, key) => {
+        var todo = {
+          id: key,
+          ...value,
+        };
+        todos.push(todo);
+      }));
+
+      debugger;
+  });
   };
 };
 
