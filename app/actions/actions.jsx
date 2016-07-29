@@ -48,9 +48,31 @@ export var startAddTodo = (text) => {
   };
 };
 
-export var toggleTodo = (id) => {
+export var updateTodo = (id , updates) => {
   return {
-    type: 'TOGGLE_TODO',
-    id
+    type: 'UPDATE_TODO',
+    id,
+    updates,
+  };
+};
+
+// we need the id , to locate the todo and the property to change , in this case,
+// it is completed property
+
+export var startToggleTodo = (id, completed ) => {
+  return (dispatch, getState) => {
+    //ES5 version
+    // var todoRef = firebaseRef.child('todos/' + id);
+
+    // ES6 version
+    var todoRef = firebaseRef.child(`todos/${id}`);
+    var updates = {
+      completed,
+      completedAt: completed ? moment().unix() : null,
+    };
+
+    return todoRef.update(updates).then(() => {
+      dispatch(updateTodo());
+    });
   };
 };

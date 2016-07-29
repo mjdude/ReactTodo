@@ -1,9 +1,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 var expect = require('expect');
-
 var actions = require('actions');
-
 var createMockStore = configureMockStore([thunk]);
 
 describe('Actions', () => {
@@ -38,6 +36,7 @@ describe('Actions', () => {
     // done lets us test for asynchon calls, continue to listen until done
     // done needs to be called after the assertions otherwise test will fail
     // done tells karma to stop listening
+
     it('should create todo and dispatch ADD_TODO', (done) => {
       const store = createMockStore({});
       const todoText = 'My todo item';
