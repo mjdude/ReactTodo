@@ -102,9 +102,9 @@ describe('Actions', () => {
         testTodoRef = firebaseRef.child('todos').push();
 
         testTodoRef.set({
-          text: 'Something todo',
+          text: 'Something to do',
           completed: false,
-          createdAt: 123,
+          createdAt: 23453453
         }).then(() => done());
       });
 
@@ -113,20 +113,21 @@ describe('Actions', () => {
       });
 
       it('should toggle todo and dispatch UPDATE_TODO action', (done) => {
-        const store = createMockStore();
+        const store = createMockStore({});
         const action = actions.startToggleTodo(testTodoRef.key, true);
 
         store.dispatch(action).then(() => {
-          const mockActions = store.mockActions();
+            const mockActions = store.getActions();
 
-          expect(mockActions[0]).toInclude({
-            type: 'UPDATE_TODO',
-            id: testTodoRef.key,
-          });
-          expect(mockActions[0]).toInclude({
-            completed: true
-          });
-          expect(mockActions[0].completedAt).toExist();
+            expect(mockActions[0]).toInclude({
+                type: 'UPDATE_TODO',
+                id: testTodoRef.key
+              });
+              expect(mockActions[0].updates).toInclude({
+                completed: true
+              });
+
+      expect(mockActions[0].updates.completedAt).toExist();
 
           done();
         }, done);
