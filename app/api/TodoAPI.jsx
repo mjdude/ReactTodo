@@ -1,8 +1,8 @@
 var $ = require('jquery');
 module.exports = {
 
-  //--- functions for local storage
-
+  // --- functions for local storage
+  //
   // setTodos: function(todos){
   //   if($.isArray(todos)){
   //     localStorage.setItem('todos', JSON.stringify(todos));

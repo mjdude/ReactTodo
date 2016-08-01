@@ -31,23 +31,19 @@ export var addTodos = (todos) => {
 export var startAddTodos = () => {
   return (dispatch, getState) => {
     var todosRef = firebaseRef.child('todos');
-    var todos =[];
 
-    var data = todosRef.once("value", (snap) => {
+    return todosRef.once('value').then((snapshot) => {
+      var todos = snapshot.val() || {};
+      var parseTodos = [];
 
-      var values = snap.val();
-      Object.keys(values).forEach((id) => {
-        var todo = {
-          id,
-          completed: values[id].completed,
-          completedAt: values[id].completedAt,
-          createdAt: values[id].createdAt,
-          text: values[id].text,
-        };
-        todos.push(todo);
+      Object.keys(todos).forEach((todoId) => {
+        parseTodos.push({
+          id: todoId,
+          ...todos[todoId],
+        });
       });
-    }).then(() => {
-      return dispatch(addTodos(todos));
+
+      dispatch(addTodos(parseTodos));
     });
 
 
