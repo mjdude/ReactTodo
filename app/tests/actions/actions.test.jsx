@@ -140,17 +140,15 @@ describe('Actions', () => {
         }, done);
       });
 
-      it('should add todos and dipatch ADD_TODOS action', (done) => {
+      it('should populate todos and dipatch ADD_TODOS action', (done) => {
         const store = createMockStore({});
         const action = actions.startAddTodos();
 
         store.dispatch(action).then(() => {
           const mockActions = store.getActions();
-
-          expect(mockActions[0]).toInclude({
-            type: 'ADD_TODOS',
-          });
-
+          
+          expect(mockActions[0].type).toEqual('ADD_TODOS');
+          expect(mockActions[0].todos.length).toEqual(1);
           expect(mockActions[0].todos[0].text).toEqual('Something to do');
 
           done();
