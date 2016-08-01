@@ -2,10 +2,10 @@ var firebase = require('firebase');
 
 try {
   var config = {
-    apiKey: "AIzaSyAXDwgqMQqknbH1amKke5pH3-HKcEj8Hfo",
-    authDomain: "mo-todo-app.firebaseapp.com",
-    databaseURL: "https://mo-todo-app.firebaseio.com",
-    storageBucket: "",
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    storageBucket: process.env.STORAGE_BUCKET,
   };
   firebase.initializeApp(config);
 } catch (e){
