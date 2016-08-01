@@ -1,6 +1,5 @@
 import moment from 'moment';
 import firebase , {firebaseRef} from 'app/firebase/';
-var _ = require('underscore');
 
 export var setSearchText = (searchText) => {
   return {
@@ -33,24 +32,25 @@ export var startAddTodos = () => {
   return (dispatch, getState) => {
     var todosRef = firebaseRef.child('todos');
     var todos =[];
+
     var data = todosRef.once("value", (snap) => {
-      debugger;
 
-      // var original = {a:1, b:2, c:3};
-      // var squaredValues = _.object(_.map(original, function (value, key) {
-      //   return [key, value * value];
-      // }));
-
-      var res = _.object(_.map(snap.val(), (value, key) => {
+      var values = snap.val();
+      Object.keys(values).forEach((id) => {
         var todo = {
-          id: key,
-          ...value,
+          id,
+          completed: values[id].completed,
+          completedAt: values[id].completedAt,
+          createdAt: values[id].createdAt,
+          text: values[id].text,
         };
         todos.push(todo);
-      }));
+      });
+    }).then(() => {
+      return dispatch(addTodos(todos));
+    });
 
-      debugger;
-  });
+
   };
 };
 
