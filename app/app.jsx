@@ -30,8 +30,10 @@ require('style!css!sass!applicationStyles')
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
-      <Route path="/" component={Login}></Route>
-      <Route path="/Todos" component={TodoApp}></Route>
+      <Route path="/">
+        <Route path="todos" component={TodoApp}></Route>
+        <IndexRoute component={Login}></IndexRoute>        
+      </Route>
     </Router>
   </Provider>,
   document.getElementById('app')

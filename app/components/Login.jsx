@@ -1,16 +1,9 @@
-var React = require('react');
-var {connect} = require('react-redux');
+import React from 'react';
 
+export var Login = React.createClass({
+      render() {
+        return <p>Login component rendering</p>
+      }
+  });
 
-export var Login = (props) => {
-    return (
-      <div>
-        <div>Login</div>
-        <div>
-          {props.children}
-        </div>
-      </div>
-    );
-};
-
-export default connect()(Login);
+export default Login;
