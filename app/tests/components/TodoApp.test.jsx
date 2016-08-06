@@ -7,6 +7,9 @@ var $ = require('jquery');
 
 var configureStore = require('configureStore');
 var TodoApp = require('TodoApp');
+
+// unconnected version {TodoApp} , eg. export var not export default connect() 
+import {TodoApp} from 'TodoApp';
 import TodoList from 'TodoList';
 
 describe('TodoApp', () => {

@@ -11,8 +11,8 @@ try {
 } catch (e){
 
 }
-// BASIC CRUD operations, .set -> create , .update -> update , .remove -> delete
 
+export var githubProvider = new firebase.auth.GithubAuthProvider();
 export var firebaseRef = firebase.database().ref();
 
 export default firebase;
