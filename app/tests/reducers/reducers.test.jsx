@@ -109,20 +109,22 @@ describe('Reducers', () => {
         var res = reducers.authReducer(df({}), df(action));
         expect(res).toEqual({uid,});
       });
+
+      it('should call logout', () => {
+          var state = {
+            uid: '123',
+          };
+          var action = {
+            type: 'LOGOUT',
+          };
+
+          var res = reducers.authReducer(df(state), df(action));
+          expect(res).toEqual({});
+        });
     });
 
-    it('should call logout', () => {
-        var state = {
-          uid: '123',
-        };
-        var action = {
-          type: 'LOGOUT',
-        };
 
-        var res = reducers.authReducer(df(state), df(action));
-        expect(res).toEqual({});
-      });
 
-    });
+    // });
 
 });
