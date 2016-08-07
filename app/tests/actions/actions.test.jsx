@@ -95,6 +95,26 @@ describe('Actions', () => {
       expect(res).toEqual(action);
     });
 
+    it('should generate LOGIN action', () => {
+      var uid = '123';
+      var action = {
+        type: 'LOGIN',
+        uid,
+      }
+
+      var res = actions.login(uid);
+      expect(res).toEqual(action);
+    });
+
+    it('should generate LOGOUT action', () => {
+      var action = {
+        type: 'LOGOUT',
+      };
+
+      var res = actions.logout();
+      expect(res).toEqual(action);
+    });
+
     describe('Test with firebase Todos', () => {
 
       var testTodoRef;
@@ -146,7 +166,7 @@ describe('Actions', () => {
 
         store.dispatch(action).then(() => {
           const mockActions = store.getActions();
-          
+
           expect(mockActions[0].type).toEqual('ADD_TODOS');
           expect(mockActions[0].todos.length).toEqual(1);
           expect(mockActions[0].todos[0].text).toEqual('Something to do');

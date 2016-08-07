@@ -4,11 +4,9 @@ var {Provider} = require('react-redux');
 var TestUtils = require('react-addons-test-utils');
 var expect = require('expect');
 var $ = require('jquery');
-
 var configureStore = require('configureStore');
-var TodoApp = require('TodoApp');
 
-// unconnected version {TodoApp} , eg. export var not export default connect() 
+// unconnected version {TodoApp} , eg. export var not export default connect()
 import {TodoApp} from 'TodoApp';
 import TodoList from 'TodoList';
 
